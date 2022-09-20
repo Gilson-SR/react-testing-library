@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
@@ -57,12 +57,12 @@ describe('Testa componente App.js', () => {
   );
 
   test('Se url for inválida, redireciona para a página "Not Found"', () => {
-    const { history } = renderWithRouter(<App />);
+    const { getByRole, history } = renderWithRouter(<App />);
     act(() => {
       history.push('/not-valid-url');
     });
 
-    const pageNotFound = screen.getByRole(
+    const pageNotFound = getByRole(
       'heading',
       { name: /page requested not found/i },
     );
